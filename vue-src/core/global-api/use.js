@@ -13,7 +13,7 @@ export function initUse (Vue: GlobalAPI) {
     }
     // additional parameters
     const args = toArray(arguments, 1)
-    /*a*/
+    // install函数需要传入一个Vue作为参数，因此这里unshift(this)
     args.unshift(this)
     if (typeof plugin.install === 'function') {
       /*install执行插件安装*/

@@ -34,6 +34,7 @@ export type Config = {
 export default ({
   /**
    * Option merge strategies (used in core/util/options)
+   * 用于定义core/util/options中的合并策略
    */
   optionMergeStrategies: Object.create(null),
 

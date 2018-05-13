@@ -169,6 +169,7 @@ export function defineReactive (
   /*在闭包中定义一个dep对象*/
   const dep = new Dep()
 
+  //如果对象对应的key的configurable为false，则无法进行操作，直接return
   const property = Object.getOwnPropertyDescriptor(obj, key)
   if (property && property.configurable === false) {
     return
@@ -245,7 +246,7 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
     return val
   }
   /*获得target的Oberver实例*/
-  const ob = (target : any).__ob__
+  const ob = (target : any).__ob__;;
   /*
     _isVue 一个防止vm实例自身被观察的标志位 ，_isVue为true则代表vm实例，也就是this
     vmCount判断是否为根节点，存在则代表是data的根节点，Vue 不允许在已经创建的实例上动态添加新的根级响应式属性(root-level reactive property)
@@ -259,16 +260,16 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
       'Avoid adding reactive properties to a Vue instance or its root $data ' +
       'at runtime - declare it upfront in the data option.'
     )
-    return val
+    return val;
   }
   if (!ob) {
-    target[key] = val
-    return val
+    target[key] = val;
+    return val;
   }
   /*为对象defineProperty上在变化时通知的属性*/
-  defineReactive(ob.value, key, val)
-  ob.dep.notify()
-  return val
+  defineReactive(ob.value, key, val);
+  ob.dep.notify();
+  return val;
 }
 
 /**
